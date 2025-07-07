@@ -1,0 +1,120 @@
+body {
+  background: linear-gradient(135deg, #002B5B, #FFD93D);
+  background-attachment: fixed;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 20px;
+  color: #fff;
+  margin: 0;
+}
+
+/* STAT CARDS */
+.stat-card {
+  border-radius: 1rem;
+  transition: transform 0.3s ease;
+}
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+.stat-figure {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.gradient-blue {
+  background: linear-gradient(135deg, #007bff, #00c6ff);
+}
+.gradient-yellow {
+  background: linear-gradient(135deg, #fff200, #ffd93d);
+}
+.gradient-purple {
+  background: linear-gradient(135deg, #6f42c1, #b983ff);
+}
+.gradient-green {
+  background: linear-gradient(135deg, #28a745, #00d084);
+}
+
+/* CHART CARD */
+.chart-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* CHART CONTAINER */
+.chart-container {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+}
+.chart-container canvas {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100%;
+}
+
+/* CARD BOX (not used in new layout but retained) */
+.card-box {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  padding: 1.5rem;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease;
+}
+.card-box:hover {
+  transform: translateY(-5px);
+}
+.card-box h3 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+}
+.card-box p {
+  color: #f0f0f0;
+  margin-bottom: 0;
+  font-size: 0.95rem;
+}
+
+/* RECENT ACTIVITY */
+.list-group-item {
+  background: transparent;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.list-group-item .text-muted {
+  color: #dddddd !important;
+}
+h5, h6 {
+  color: #fff;
+  font-weight: 600;
+}
+small {
+  color: #e0e0e0;
+}
+
+/* RESPONSIVE OPTIMIZATION */
+@media (max-width: 768px) {
+  .chart-card {
+    padding: 1rem;
+  }
+
+  .stat-figure {
+    font-size: 1.5rem;
+  }
+
+  .chart-container {
+    padding: 0.5rem;
+  }
+
+  .row.g-4 {
+    gap: 1.5rem 0;
+  }
+}

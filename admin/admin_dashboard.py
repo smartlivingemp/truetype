@@ -1,0 +1,33 @@
+from flask import Blueprint, render_template, session
+from db import db
+
+admin_dashboard_bp = Blueprint('admin_dashboard', __name__, template_folder='templates')
+
+# Collections
+clients_collection = db["clients"]
+orders_collection = db["orders"]
+payments_collection = db["payments"]
+
+# Dashboard home
+@admin_dashboard_bp.route('/dashboard')
+def dashboard():
+    # Count unapproved orders
+    unapproved_orders_count = orders_collection.count_documents({"status": "pending"})
+
+    # Count overdue clients
+    overdue_clients_count = clients_collection.count_documents({"status": "overdue"})
+
+    # Count unconfirmed payments
+    unconfirmed_payments_count = payments_collection.count_documents({"status": "pending"})
+
+    return render_template(
+        'admin/admin_dashboard.html',
+        unapproved_orders_count=unapproved_orders_count,
+        overdue_clients_count=overdue_clients_count,
+        unconfirmed_payments_count=unconfirmed_payments_count
+    )
+
+# Register client form (partial)
+@admin_dashboard_bp.route('/register_client_partial')
+def register_client_partial():
+    return render_template('partials/register_client.html', role='admin')

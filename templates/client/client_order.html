@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Submit Order | Oil ERP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="icon" href="https://res.cloudinary.com/dl2ipzxyk/image/upload/v1751107241/logo_ijmteg.avif" />
+
+  <style>
+    body {
+      background: #f4f6f9;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    .navbar-brand img {
+      height: 40px;
+    }
+
+    .form-slide-in {
+      animation: slideIn 0.6s ease-out;
+    }
+
+    @keyframes slideIn {
+      0% {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .form-container {
+      max-width: 700px;
+      margin: 60px auto;
+      background: #ffffff;
+      padding: 35px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-title {
+      font-weight: 700;
+      margin-bottom: 25px;
+      color: #0d6efd;
+      text-align: center;
+    }
+
+    label.form-label {
+      font-weight: 500;
+    }
+
+    .btn-primary {
+      background-color: #0d6efd;
+      border: none;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background-color: #0b5ed7;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 20px;
+      color: #0d6efd;
+      text-decoration: none;
+    }
+
+    .back-link i {
+      margin-right: 6px;
+    }
+
+    .alert {
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-light bg-white shadow-sm px-3">
+  <a class="navbar-brand d-flex align-items-center" href="#">
+    <img src="https://res.cloudinary.com/dl2ipzxyk/image/upload/v1751107241/logo_ijmteg.avif" alt="Logo">
+    <span class="ms-2 fw-bold text-primary">Oil ERP</span>
+  </a>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+  <div class="form-container form-slide-in">
+    <a href="/client/dashboard" class="back-link"><i class="bi bi-arrow-left"></i> Back to Dashboard</a>
+    <h3 class="form-title">Submit New Order</h3>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Product</label>
+          <select class="form-select" name="product" required>
+            <option value="">Select Product</option>
+            <option value="PMS">PMS</option>
+            <option value="AGO">AGO</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Quantity</label>
+          <select class="form-select" name="quantity" required>
+            <option value="">Select Quantity</option>
+            <option value="13500">13,500</option>
+            <option value="18000">18,000</option>
+            <option value="27000">27,000</option>
+            <option value="36000">36,000</option>
+            <option value="40500">40,500</option>
+            <option value="45000">45,000</option>
+            <option value="54000">54,000</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Vehicle Number</label>
+          <input type="text" class="form-control" name="vehicle_number" placeholder="e.g. GT-1234-21" required>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Region</label>
+          <input type="text" class="form-control" name="region" required>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Driver's Name</label>
+          <input type="text" class="form-control" name="driver_name" required>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Driver's Phone</label>
+          <input type="tel" class="form-control" name="driver_phone" placeholder="e.g. 0551234567" required>
+        </div>
+      </div>
+
+      <div class="d-grid mt-4">
+        <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-check-circle me-1"></i>Submit Order</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
