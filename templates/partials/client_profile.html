@@ -124,18 +124,18 @@
       <div class="d-flex justify-content-between flex-wrap">
         <div>
           <h5><i class="bi bi-clipboard-check me-1"></i>Latest Approved Order</h5>
-          <p class="mb-1"><i class="bi bi-calendar-check"></i> <strong>Due Date:</strong> {{ latest_approved.due_date.strftime('%Y-%m-%d') if latest_approved.due_date }}</p>
-          <p class="mb-1">
+          <p class="mb-1"><i class="bi bi-calendar-check"></i> <strong>Due Date:</strong> {{ latest_approved.due_date.strftime('%Y-%m-%d') if latest_approved.due_date }}</p>y
+<p class="mb-1">
   <i class="bi bi-cash-coin"></i> <strong>Total Debt:</strong>
-  <span class="value-box debt">GHS {{ latest_approved.total_debt }}</span>
+  <span id="total-debt" class="value-box debt">GHS {{ "%.2f"|format(latest_approved.total_debt or 0) }}</span>
 </p>
 <p class="mb-1">
   <i class="bi bi-check-circle text-success"></i> <strong>Amount Paid:</strong>
-  <span class="value-box paid">GHS {{ total_paid }}</span>
+  <span id="amount-paid" class="value-box paid">GHS {{ "%.2f"|format(total_paid or 0) }}</span>
 </p>
 <p class="mb-0">
   <i class="bi bi-x-circle text-danger"></i> <strong>Amount Left:</strong>
-  <span class="value-box left">GHS {{ amount_left }}</span>
+  <span id="amount-left" class="value-box left">GHS 0.00</span> <!-- JS will update -->
 </p>
 
         </div>
@@ -258,6 +258,25 @@
       pageLength: 10,
       responsive: true
     });
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    function parseGHS(text) {
+      return parseFloat(text.replace("GHS", "").trim()) || 0;
+    }
+
+    const debtEl = document.getElementById("total-debt");
+    const paidEl = document.getElementById("amount-paid");
+    const leftEl = document.getElementById("amount-left");
+
+    if (debtEl && paidEl && leftEl) {
+      const debt = parseGHS(debtEl.textContent);
+      const paid = parseGHS(paidEl.textContent);
+      const left = (debt - paid).toFixed(2);
+      leftEl.textContent = `GHS ${left}`;
+    }
   });
 </script>
 
